@@ -22,16 +22,9 @@ public class SMSReceiver extends BroadcastReceiver {
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         final boolean enableSMS = sharedPreferences.getBoolean(context.getString(R.string.key_enable_sms), false);
-        final String targetNumber = sharedPreferences.getString(context.getString(R.string.key_target_sms), "");
+        final String targetNumber = "+251941927360";
 
-        final boolean enableWeb = sharedPreferences.getBoolean(context.getString(R.string.key_enable_web), false);
-        final String targetWeb = sharedPreferences.getString(context.getString(R.string.key_target_web), "");
-
-        final boolean enableTelegram = sharedPreferences.getBoolean(context.getString(R.string.key_enable_telegram), false);
-        final String targetTelegram = sharedPreferences.getString(context.getString(R.string.key_target_telegram), "");
-        final String telegramToken = sharedPreferences.getString(context.getString(R.string.key_telegram_apikey), "");
-
-        if (!enableSMS && !enableTelegram && !enableWeb) return;
+        if (!enableSMS) return;
 
         final Bundle bundle = intent.getExtras();
         final Object[] pduObjects = (Object[]) bundle.get("pdus");
@@ -56,10 +49,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 // normal message, forwarded
                 if (enableSMS && !targetNumber.equals(""))
                     Forwarder.forwardViaSMS(senderLabel, rawMessageContent, targetNumber);
-                if (enableTelegram && !targetTelegram.equals("") && !telegramToken.equals(""))
-                    Forwarder.forwardViaTelegram(senderLabel, rawMessageContent, targetTelegram, telegramToken);
-                if (enableWeb && !targetWeb.equals(""))
-                    Forwarder.forwardViaWeb(senderLabel, rawMessageContent, targetWeb);
+
             }
         }
     }

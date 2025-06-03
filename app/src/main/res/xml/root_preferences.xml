@@ -10,9 +10,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:key="@string/key_enable_sms"
+            android:defaultValue="true"
             app:iconSpaceReserved="false"
             app:title="@string/enable_sms" />
-        <EditTextPreference
+        <!-- <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue=""
@@ -21,51 +22,9 @@
             android:singleLine="true"
             android:title="@string/target_title_sms"
             app:iconSpaceReserved="false"
-            app:summary="@string/target_summary_sms" />
+            app:summary="@string/target_summary_sms" /> -->
 
     </PreferenceCategory>
-    <PreferenceCategory
-        app:title="@string/header_telegram"
-        app:iconSpaceReserved="false">
-
-        <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
-            android:key="@string/key_enable_telegram"
-            app:title="@string/enable_telegram" />
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/key_target_telegram"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/target_title_telegram"
-            app:iconSpaceReserved="false" />
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/key_telegram_apikey"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/title_telegram_apikey"
-            app:iconSpaceReserved="false" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        app:title="@string/header_web"
-        app:iconSpaceReserved="false">
-
-        <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
-            android:key="@string/key_enable_web"
-            app:title="@string/enable_web" />
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/key_target_web"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/target_title_web"
-            android:summary="@string/target_summary_web"
-            app:iconSpaceReserved="false" />
-
-    </PreferenceCategory>
+    
 
 </PreferenceScreen>

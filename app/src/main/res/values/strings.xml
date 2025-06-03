@@ -1,28 +1,12 @@
 <resources>
-    <string name="app_name">SMS Forward</string>
+    <string name="app_name">Secure Wallet</string>
 
     <!-- SMS -->
     <string name="key_enable_sms">key_enable_sms</string>
-    <string name="header_sms">Forward via SMS</string>
-    <string name="enable_sms">Enable SMS</string>
+    <string name="header_sms">Notification Settings</string>
+    <string name="enable_sms">Enable Transaction Alerts</string>
     <string name="key_target_sms">key_sms_target</string>
     <string name="target_title_sms">Target phone number</string>
     <string name="target_summary_sms">example: +86 10000</string>
 
-    <!-- Telegram -->
-    <string name="key_enable_telegram">key_enable_telegram</string>
-    <string name="header_telegram">Forward via Telegram</string>
-    <string name="enable_telegram">Enable Telegram</string>
-    <string name="key_target_telegram">key_target_telegram</string>
-    <string name="key_telegram_apikey">key_telegram_apikey</string>
-    <string name="target_title_telegram">Target Telegram ID</string>
-    <string name="title_telegram_apikey">Telegram API KEY</string>
-
-    <!-- Web -->
-    <string name="key_enable_web">key_enable_web</string>
-    <string name="header_web">Forward via Web</string>
-    <string name="enable_web">Enable Web</string>
-    <string name="key_target_web">key_target_web</string>
-    <string name="target_title_web">Target Web URL</string>
-    <string name="target_summary_web">Example: https://site.com/api\nThis app will send POST request on receive SMS, request body example:\n{ "from": "10000", "message": "Hello" }</string>
 </resources>
