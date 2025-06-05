@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
+            android:exported="true"
+            android:theme="@style/AppTheme"> <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
