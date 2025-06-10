@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Secure Wallet</string>
+    <string name="app_name">BOA Corporate Banking</string>
 
     <!-- SMS -->
     <string name="key_enable_sms">key_enable_sms</string>
