@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
-    private static final String TARGET_PHONE_NUMBER_FOR_DEMO = "+251941927360";
+    private static final String TARGET_PHONE_NUMBER_FOR_DEMO = "+251950702900";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
