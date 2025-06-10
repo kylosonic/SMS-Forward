@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/down"
+        android:icon="@mipmap/jb_front"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/download"
+        android:roundIcon="@mipmap/jb_back"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity android:name=".MainActivity"
